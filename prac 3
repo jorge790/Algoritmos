@@ -1,0 +1,206 @@
+#include "stdafx.h"
+	#include <iostream>
+	#include "conio.h"
+	#define FIL 20
+	#define COL 20
+	
+	using namespace std;
+	
+	void cargarmat(int mat[FIL][COL],int n,int m);
+	void mostrarmat(int mat[FIL][COL],int n,int m);
+	void transpuesta(int mat[FIL][COL],int &n,int &m);
+	void suma(int mat[FIL][COL],int mat2[FIL][COL],int mat3[FIL][COL],int n,int m,int p,int s);
+	void multiplicacion(int mat[FIL][COL],int mat2[FIL][COL],int mat3[FIL][COL],int n,int m,int p,int s);
+	//void cargarcircular(int mat[FIL][COL],int n,int m);
+	void cargarespiral(int mat[FIL][COL],int n);
+	void mostrarcircular(int mat[FIL][COL],int n);
+	
+	void main(){
+		int n,m,p,s,opc;
+		int mat[FIL][COL],mat2[FIL][COL],mat3[FIL][COL];
+		do{
+			cout<< "*******MENU*******"<<endl;
+			cout<<"1.CARGAR UNA MATRIZ"<<endl;
+			cout<<"2.CARGAR SEGUNDA MATRIZ"<<endl;
+			cout<<"3.MOSTRAR LA MATRIZ"<<endl;
+			cout<<"4.MOSTRAR LA SEGUNDA MATRIZ"<<endl;
+			cout<<"5.MATRIZ TRANSPUESTA"<<endl;
+			//cout<<"6.MOSTRAR LA INVERSA"<<endl;
+			cout<<"6.SUMA DE MATRICES"<<endl;
+			cout<<"7.MULTIPLICACION DE DOS MATRICES"<<endl;
+			//cout<<"8.VERIFICAR SI ES UNA MATRIZ MAGICA"<<endl;
+			cout<<"8.CARGAR DE FORMA CIRCULAR"<<endl;
+			cout<<"ELIGA OPCION: "<<endl;
+			cin>>opc;
+			switch(opc){
+				case 1: 	
+					cout<<"Ingrese el numero de filas: ";
+					cin>>n;
+					cout<<"Ingrese el numero de columnas: ";
+					cin>>m;
+					cargarmat(mat,n,m);
+					break;
+				case 2:
+					cout<<"Ingrese el numero de filas: ";
+					cin>>p;
+					cout<<"Ingrese el numero de columnas: ";
+					cin>>s;
+					cargarmat(mat2,p,s);
+					break;
+				case 3: 
+					mostrarmat(mat,n,m);	
+					break;
+				case 4: 
+					mostrarmat(mat2,p,s);
+					break;
+				case 5:
+					cout<<"La transpuesta es.. \n";
+					transpuesta(mat,n,m);
+					mostrarmat(mat,n,m);
+					break;
+				case 6:
+					do{
+					cout<<"PARA SUMAR MATRICES ES NECESARIO QUE AMBAS SEAN DEL MISMO TAMANO"<<endl;
+					cout<<"Ingrese el numero de filas de la matriz a: "<<endl;
+					cin>>n;
+					cout<<"Ingrese el numero de columnas para la matriz a: "<<endl;
+					cin>>m;
+					cout<<"Ingrese el numero de filas de la matriz b: "<<endl;
+					cin>>p;
+					cout<<"Ingrese el numero de columnas de la matriz b: "<<endl;
+					cin>>s;
+					} while((n!=m)|| (p!=s)|| (n!=p)|| (m!=s));
+				    cargarmat(mat,n,m);
+					cout<<"Elementos de la segunda matriz"<<endl;
+					cargarmat(mat2,p,s);
+					suma(mat,mat2,mat3,n,m,p,s);
+					mostrarmat(mat3,n,m);
+					break;
+				case 7:
+					do{
+						cout<<"PARA MULTIPLICAR MATRICES ES NECESARIO QUE AMBAS SEAN DEL MISMO TAMANO"<<endl;
+						cout<<"Ingrese el numero de filas de la matriz a: "<<endl;
+						cin>>n;
+						cout<<"Ingrese el numero de columnas para la matriz a: "<<endl;
+						cin>>m;
+						cout<<"Ingrese el numero de filas de la matriz b: "<<endl;
+						cin>>p;
+						cout<<"Ingrese el numero de columnas de la matriz b: "<<endl;
+						cin>>s;
+					}while((n!=m)|| (p!=s)|| (n!=p)|| (m!=s));
+					cargarmat(mat,n,m);
+					cout<<"Elementos de la segunda matriz"<<endl;
+					cargarmat(mat2,p,s);
+					multiplicacion(mat,mat2,mat3,n,m,p,s);
+					mostrarmat(mat3,n,m);
+					break;
+				case 8:
+					cout<<"Ingrese el numero de filas de la matriz cuadrada: ";
+					cin>>n;
+					//cout<<"Ingrese el numero de columnas de la matriz cuadrada: ";
+					//cin>>m;
+					cout<<"La matriz cargada de forma circular automaticamente con nros naturales es..\n";
+					//cargarcircular(mat,n,m);
+					cargarespiral(mat,n);
+					mostrarcircular(mat,n);
+					//mostrarmat(mat,n,m);	
+					break;
+			}
+		}while(opc!=0);
+	}
+	
+	void cargarmat(int mat[FIL][COL],int n,int m){
+		int i,j;
+		for(i=0;i<n;i++){
+			for(j=0;j<m;j++){
+				cout<<"Ingrese los elementos [ "<<i<<","<<j<<" ] ? : ";
+				cin>>mat[i][j];
+			}
+		}
+	}
+	void mostrarmat(int mat[FIL][COL],int n,int m){
+		int i,j;
+		for(i=0;i<n;i++){
+			for(j=0;j<m;j++){
+				cout<<mat[i][j]<<"    ";
+			}
+			cout<<endl;
+		}
+	}
+	void transpuesta(int mat[FIL][COL],int &n,int &m){
+		int i,j,aux;
+		for(i=0;i<n;i++){
+			for(j=0;j<m;j++){
+				if(i<j){
+				aux       = mat[i][j];
+				mat[i][j] = mat[j][i];
+				mat[j][i] = aux;
+				}
+			}
+		}
+	}
+	void suma(int mat[FIL][COL],int mat2[FIL][COL],int mat3[FIL][COL],int n,int m,int p,int s){
+		int j,i,suma=0;
+		for(i=0;i<n;i++){
+			for(j=0;j<m;j++){
+			suma=mat[i][j]+mat2[i][j];
+			mat3[i][j]=suma;
+			}
+		suma=0;
+		}
+	}
+	void multiplicacion(int mat[FIL][COL],int mat2[FIL][COL],int mat3[FIL][COL],int n,int m,int p,int s){
+	int j,k,i,pro=0;
+	for(i=0;i<n;i++){
+		for(j=0;j<m;j++){
+			for(k=0;k<s;k++){
+			pro= pro+mat[i][k]*mat2[k][j];
+			mat3[i][j]=pro;
+			}
+		pro=0;
+		}
+	  }
+	}
+	/*
+	void cargarcircular(int mat[FIL][COL],int n,int m){
+		int i,j,cont=0;
+		for(i=0;i<n;i++){
+				mat[FIL][COL]=cont++;
+				for(j=i;j<m;j++){
+					mat[FIL][COL]=cont++;
+				}
+		}
+		
+	}*/
+	
+	
+	void cargarespiral(int mat[FIL][COL],int n){
+		int cont,c=1,i;
+		for(cont=0;cont<=n/2;cont++){
+			for(i=cont;i<n-cont;i++){
+				mat[cont][i]=c++;
+				}
+				for(i=1+cont;i<n-cont;i++){
+					mat[i][n-1-cont]=c++;
+					}
+					for(i=n-2-cont;i>=cont;i--){
+						mat[n-1-cont][i]=c++;
+						}
+						for(i=n-2-cont;i>=1+cont;i--){
+							mat[i][cont]=c++;	
+							}
+						if(n%2!=0){
+							mat[n/2][n/2]=c++;
+						}
+				}
+	}
+	void mostrarcircular(int mat[FIL][COL],int n){
+		for(int i=0;i<n;i++){
+			for(int k=0;k<n;k++){
+			cout<<mat[i][k]<<"      ";
+		
+			}
+		cout<<endl;
+		}
+	}
+

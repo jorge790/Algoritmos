@@ -1,0 +1,109 @@
+#include <iostream>
+#include <conio.h>
+using namespace std;
+
+void CargarMatrizEspiral(int mat[10][10],int n,int m)
+{
+	int i,j,k,cont=1;
+	for(i=0;i<n;i++)
+	{
+		mat[i][i]=cont++;
+	}
+	for(k=0;k<n;k++)
+	{
+		i=k;
+		for(j=k;j<(n-k);j++)
+		{
+			if(i<j)
+			{
+				mat[i][j]=cont++;
+			}
+		}
+		j=n-1-k;
+		for(i=k+1;i<(m-k);i++)
+		{
+			if(i<j)
+			{
+				mat[i][j]=cont++;
+			}
+		}
+		i=m-1-k;
+		for(j=n-2-k;j>=k;j--)
+		{
+			if(i<j)
+			{
+				mat[i][j]=cont++;
+			}
+		}
+		j=k;
+		for(i=m-2-k;i>k;i--)
+		{
+			if(i<j)
+			{
+				mat[i][j]=cont++;
+			}
+		}
+	}
+	for(k=0;k<n;k++)
+	{
+		j=k;
+		for(i=k;i<(n-k);i++)
+		{
+			if(i>j)
+			{
+				mat[i][j]=cont++;
+			}
+		}
+		i=n-1-k;
+		for(j=k+1;j<(m-k);j++)
+		{
+			if(i>j)
+			{
+				mat[i][j]=cont++;
+			}
+		}
+		j=m-1-k;
+		for(i=n-2-k;i>=k;i--)
+		{
+			if(i>j)
+			{
+				mat[i][j]=cont++;
+			}
+		}
+		i=k;
+		for(j=m-2-k;j>k;j--)
+		{
+			if(i>j)
+			{
+				mat[i][j]=cont++;
+			}
+		}
+	}
+}
+
+void MostrarMatriz(int mat[10][10],int n,int m)
+{
+	int i,j;
+	for(i=0;i<n;i++)
+	{
+		for(j=0;j<m;j++)
+		{
+			cout<<"\t"<<mat[i][j];
+		}
+		cout<<"\n\n\n\n";
+	}
+}
+
+int main()
+{
+	int mat[10][10],n,m;
+	cout<<"Ingresar numero de filas de la matriz: ";
+	cin>>n;
+	cout<<"Ingresar numero de columnas de la matriz: ";
+	cin>>m;
+	cout<<endl;
+	CargarMatrizEspiral(mat,n,m);
+	cout<<endl;
+	MostrarMatriz(mat,n,m);
+	getch();
+}

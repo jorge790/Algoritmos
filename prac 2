@@ -1,0 +1,311 @@
+#include "stdafx.h"
+	
+	#include "conio.h"
+	
+	#include <iostream>
+	
+	#include "math.h"
+	
+	#include <stdlib.h>
+	
+	#include <time.h>
+	
+	using namespace std;
+	
+	float volcir(int r);
+	
+	float porcentaje(int x,int n);
+	
+	int suma (int a,int b);
+	
+	int resta(int a,int b);
+	
+	int mult(int a, int b);
+	
+	int sumanat(int n);
+	
+	void serie1(int n);
+	
+	int sumadig(int n);
+	
+	int elimdigpar(int n);
+	
+	int invertir (int n);
+	
+	int main()
+	
+	{int opcion,x,y,r,s,m;
+	
+	do{
+	
+	cout<<"**********MENU**********";
+	
+	cout<<endl<<"1.Hallar el volumen de una circunferencia";
+	
+	cout<<endl<<"2.80% de la ganancia de un trabajador";
+	
+	cout<<endl<<"3.Operaciones aritmeticas con dos numeros";
+	
+	cout<<endl<<"4.Suma de los primeros N numeros naturales";
+	
+	cout<<endl<<"5.Mostrar la serie";
+	
+	cout<<endl<<"6.Hallar la suma de los digitos";
+	
+	cout<<endl<<"7.Cambiar un numero de base N a base 10";
+	
+	cout<<endl<<"8.Elminar digitos pares";
+	
+	cout<<endl<<"9.Invertir un numero";
+	
+	cout<<endl<<"0.Salir";
+	
+	cout<<endl<<"Elija una opcion: ";
+	
+	cin>>opcion;
+	
+	system("cls");
+	
+	switch(opcion){
+	
+	case 1: cout<< "Introducir el radio ";
+	
+	cin >> x;
+	
+	r=volcir(x);
+	
+	cout<< "El volumen de la circunferencia es: "<<r<<"\n";
+	
+	break;
+	
+	case 2: cout<<"Ingrese cantidad de horas trabajadas: ";
+	
+	cin>>x;
+	
+	cout<<"Ingrese monto por hora: ";
+	
+	cin>>y;
+	
+	r=porcentaje(x,y);
+	
+	break;
+	
+	case 3: cout<< "Introducir primer numero natural: ";
+	
+	cin >>x;
+	
+	cout<<"Introducir segundo numero natural: ";
+	
+	cin>>y;
+	
+	s=suma(x,y);
+	
+	r=resta(x,y);
+	
+	m=mult(x,y);
+	
+	cout<<"La suma de los dos numeros es: "<<s<<"\n";
+	
+	cout<<"La resta de los dos numeros es: "<<r<<"\n";
+	
+	cout<<"La multiplicacion de los dos numeros es: "<<m<<"\n";
+	
+	break;
+	
+	case 4: cout<< "Introducir un numero natural: ";
+	
+	cin >>x;
+	
+	r=sumanat(x);
+	
+	cout<<"La suma es: "<<"\n";
+	
+	break;
+	
+	case 5: cout<< "Introducir un numero natural: ";
+	
+	cin >>x;
+	
+	r=serie1;
+	
+	cout<<"La serie es: "<<r<<"\n";
+	
+	break;
+	
+	case 6: cout<< "Introducir un numero natural: ";
+	
+	cin >>x;
+	
+	r=sumadig(x);
+	
+	cout<<"La suma de los digitos es: ";
+	
+	break;
+	
+	case 7: cout<<"Ingrese la cantidad de obreros:";
+	
+	cin>>x;
+	
+	break;
+	
+	case 8: cout<< "Introducir un numero natural: ";
+	
+	cin >>x;
+	
+	r=elimdigpar(x);
+	
+	break;
+	
+	case 9: cout<< "Introducir un numero natural: ";
+	
+	cin >>x;
+	
+	r=invertir(x);
+	
+	cout<<"El numero invertido es: "<<r<<"\n";
+	
+	break;
+	
+	}
+	
+	}while(opcion !=0);
+	
+	getch();
+	
+	}
+	
+	float volcir(int r)
+	
+	{float resp;
+	
+	cout<<"Ingrese radio: ";
+	
+	cin>>r;
+	
+	resp=(4/3)*3.141516*r*r;
+	
+	return resp;
+	
+	}
+	
+	float porcentaje(int x,int n)
+	
+	{float g;
+	
+	g=(x*n)*0.8;
+	
+	return g;
+	
+	}
+	
+	int suma (int a,int b)
+	
+	{int s;
+	
+	s=a+b;
+	
+	return s;
+	
+	}
+	
+	int resta(int a,int b)
+	
+	{int r;
+	
+	r=a-b;
+	
+	return r;
+	
+	}
+	
+	int mult(int a, int b)
+	
+	{int m;
+	
+	m=a*b;
+	
+	return m;
+	
+	}
+	
+	int sumanat(int n)
+	
+	{int i, s=0;
+	
+	for(i=0;i<0;i++)
+	
+	{s=s+i;
+	
+	}
+	
+	}
+	
+	void serie1(int n)
+	
+	{int s=2,i;
+	
+	for(i=0;i<n;i++)
+	
+	{cout<<s;
+	
+	s=s+4;
+	
+	}
+	
+	}
+	
+	int sumadig(int n)
+	
+	{int s=0,d;
+	
+	while(n>0)
+	
+	{d=d%10;
+	
+	s=s+d;
+	
+	n=n/10;
+	
+	}
+	
+	}
+	
+	int invertir (int n)
+	
+	{int d, nnro=0;
+	
+	while(n>0)
+	
+	{d=n%10;
+	
+	nnro=(nnro*10)+d;
+	
+	n=n/10;
+	
+	}
+	
+	return nnro;
+	
+	}
+	
+	int elimdigpar(int n)
+	
+	{int d, nnro=0;
+	
+	while(n>0)
+	
+	{d=n%10;
+	
+	if(d%2!=0)
+	
+	{nnro=(nnro*10)+d;
+	
+	}
+	
+	n=n/10;
+	
+	}
+	
+	return(invertir(nnro));
+	
+	}
